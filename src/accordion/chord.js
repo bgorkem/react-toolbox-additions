@@ -5,13 +5,11 @@ import { FontIcon } from 'react-toolbox/lib/font_icon';
 import { themr } from 'react-css-themr';
 import { CHORD } from '../identifiers.js';
 
-const contentId = 'contentId';
 
 class Chord extends Component {
 
   constructor(props) {
       super();
-
       this.state.active = props.active;
   }
 
@@ -66,7 +64,7 @@ class Chord extends Component {
   }
 
   collapse() {
-    let contentEl = ReactDOM.findDOMNode(this.refs[contentId]);
+    let contentEl = ReactDOM.findDOMNode(this.contentEl);
     if (contentEl) {
       contentEl.style.height = getComputedStyle(contentEl).height;
       contentEl.offsetHeight;
@@ -75,7 +73,7 @@ class Chord extends Component {
   }
 
   expand() {
-    let contentEl = ReactDOM.findDOMNode(this.refs[contentId]);
+    let contentEl = ReactDOM.findDOMNode(this.contentEl);
     if (contentEl) {
       let initialHeight = getComputedStyle(contentEl).height;
       contentEl.style.height = 'auto';
@@ -174,7 +172,7 @@ class Chord extends Component {
           <div className={theme.text}>{label}</div>
           {lpIcon}
         </label>
-        <div ref={contentId} className={classnames(theme.content, (!active ? theme.hidden : null))}>
+        <div ref={el=> {this.contentEl = el;}} className={classnames(theme.content, (!active ? theme.hidden : null))}>
           {children}
         </div>
       </div>
